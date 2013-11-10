@@ -118,7 +118,7 @@
 				mozSystem : true
 			});
 			
-			var bairro = http://cep.correiocontrol.com.br/02245010.json
+			// bairro = http://cep.correiocontrol.com.br/02245010.json
 			
 			xhr.open('GET', 'http://192.168.0.159:8081/search/dados_gerais_bairro/bela%20vista');
 			xhr.overrideMimeType('application/json');
@@ -272,6 +272,7 @@
 				<form id="bairro-page" role="dialog" data-type="confirm" class="hidden">
 					<section>
 						<h1>Bairro</h1>
+						<input type=hidden id='cep' value=''>
 						<p id='bairro-list'>
 							lorem ipsum.....
 						</p>

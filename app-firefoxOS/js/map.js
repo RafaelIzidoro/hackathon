@@ -90,6 +90,30 @@ $(document).ready(function() {
 	}
 
 
+	function get_cep(lat, lon) {
+			var xhr = new XMLHttpRequest({
+			mozSystem : true
+			});
+			
+			// bairro = http://cep.correiocontrol.com.br/02245010.json
+			
+			xhr.open('GET', 'http://maps.google.com/maps/api/geocode/json?address=' + data[0].lat +',' + data[0].lon +'&sensor=false');
+			xhr.overrideMimeType('application/json');
+			xhr.responseType = "json";
+			xhr.send();
+			xhr.onreadystatechange = function() {
+				if (xhr.status == 200) {
+					console.log(xhr.response);
+					$('#escola-list').text(this.response[0].results[0][6].short_name);
+				}
+			};
+
+			xhr.onerror = function() {
+				console.log('Erro!');
+			};
+		}
+
+
 
 
 
@@ -98,6 +122,9 @@ $(document).ready(function() {
 		$.getJSON('http://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + inp, function(data) {
 			var items = [];
 			getUserLocation(data[0].lat, data[0].lon);
+			
+			
+						
 			$.each(data, function(key, val) {
 			  items.push(
 			    "<li><a href='#' onclick='chooseAddr(" +
