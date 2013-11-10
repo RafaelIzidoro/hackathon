@@ -51,6 +51,9 @@
 
 		<script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
 
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?&sensor=false">
+    	</script>
+
 		<!-- mapas -->
 		<script type="text/javascript" charset="UTF-8" src="https://js.cit.api.here.com/ee/2.5.3/jsl.js?with=all"></script>
 		<link rel="stylesheet" href="css/map.css">
@@ -114,13 +117,14 @@
 		</script>
 
 			<script>
+			function fill_bairro(bairro) {
 			var xhr = new XMLHttpRequest({
 				mozSystem : true
 			});
 			
 			// bairro = http://cep.correiocontrol.com.br/02245010.json
 			
-			xhr.open('GET', 'http://192.168.0.159:8081/search/dados_gerais_bairro/bela%20vista');
+			xhr.open('GET', 'http://192.168.0.159:8081/search/dados_gerais_bairro/' + bairro);
 			xhr.overrideMimeType('application/json');
 			xhr.responseType = "json";
 			xhr.send();
@@ -143,6 +147,8 @@
 			xhr.onerror = function() {
 				console.log('Erro!');
 			};
+			};
+			fill_bairro('bela vista');
 		</script>
 
 	</head>

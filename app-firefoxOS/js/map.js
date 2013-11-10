@@ -89,29 +89,26 @@ $(document).ready(function() {
 		curr_marker = L.marker([lat, lng]).addTo(map);				
 	}
 
+	
+	function get_bairro(cep) {
+		
+		$.getJSON('http://cep.correiocontrol.com.br/' + cep + '.json', function(data) {
+			var items = [];
+
+			console.log(data.bairro);
+			fill_bairro(data.bairro);
+		  });
+		  };
+	
 
 	function get_cep(lat, lon) {
-			var xhr = new XMLHttpRequest({
-			mozSystem : true
-			});
-			
-			// bairro = http://cep.correiocontrol.com.br/02245010.json
-			
-			xhr.open('GET', 'http://maps.google.com/maps/api/geocode/json?address=' + data[0].lat +',' + data[0].lon +'&sensor=false');
-			xhr.overrideMimeType('application/json');
-			xhr.responseType = "json";
-			xhr.send();
-			xhr.onreadystatechange = function() {
-				if (xhr.status == 200) {
-					console.log(xhr.response);
-					$('#escola-list').text(this.response[0].results[0][6].short_name);
-				}
-			};
+		$.getJSON('http://maps.google.com/maps/api/geocode/json?address=' + lat + ',' + lon + '&sensor=false', function(data) {
+			var items = [];
 
-			xhr.onerror = function() {
-				console.log('Erro!');
-			};
-		}
+			console.log(data.results[1].address_components[6].short_name);
+			get_bairro(data.results[1].address_components[6].short_name.replace('-',''));
+		  });
+		  };
 
 
 
@@ -123,7 +120,7 @@ $(document).ready(function() {
 			var items = [];
 			getUserLocation(data[0].lat, data[0].lon);
 			
-			
+			get_cep(data[0].lat, data[0].lon);
 						
 			$.each(data, function(key, val) {
 			  items.push(
