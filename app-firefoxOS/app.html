@@ -164,7 +164,40 @@
 				};
 			};
 			fill_bairro('bela vista');
-		</script>
+        </script>
+
+         <script>
+            function fill_escola(nome) {
+            var xhr = new XMLHttpRequest({
+                mozSystem : true
+            });
+            
+            // bairro = http://cep.correiocontrol.com.br/02245010.json
+            
+            xhr.open('GET', 'http://192.168.0.159:8081/search/qedu/' + nome);
+            xhr.overrideMimeType('application/json');
+            xhr.responseType = "json";
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.status == 200) {
+                    console.log(this.response.schools[0]);
+                    $('#escola-list').text('');
+                    $('#escola-list').append('<ul>');
+                    $('#escola-list').append('<li>Nome: ' + this.response.schools[0].name + '</li>');
+                    $('#escola-list').append('<li>Região: ' + this.response.schools[0].subtitle + '</li>');
+                    $('#escola-list').append('</ul>');
+                }
+            };
+
+            xhr.onerror = function() {
+                console.log('Erro!');
+            };
+            };
+            fill_escola('sao_paulo');
+        </script>
+
+
+
 		<script>
 			function fill_interesse(bairro, index) {
 				var xhr = new XMLHttpRequest({
