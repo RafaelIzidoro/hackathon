@@ -20,21 +20,21 @@ def jsontest():
 def get_area_contaminada(bairro):
         response.content_type = 'application/json'
         response.add_header('Access-Control-Allow-Origin', '*')
-        bairro = bairro.replace('%20',' ')
+        bairro = bairro.replace('%20', ' ')
         return (get_data('area_contaminada', bairro.upper()))
 
 @route('/search/cartorios/<bairro>')
 def get_cartorios(bairro):
         response.content_type = 'application/json'
         response.add_header('Access-Control-Allow-Origin', '*')
-        bairro = bairro.replace('%20',' ')
+        bairro = bairro.replace('%20', ' ')
         return (get_data('cartorios', bairro.upper()))
     
 @route('/search/dados_gerais_bairro/<bairro>')
 def get_dados_gerais_bairro(bairro):
         response.content_type = 'application/json'
         response.add_header('Access-Control-Allow-Origin', '*')
-        bairro = bairro.replace('%20',' ')
+        bairro = bairro.replace('%20', ' ')
         print bairro
         return (get_data('dados_gerais_bairro', bairro.upper()))
     
@@ -42,21 +42,21 @@ def get_dados_gerais_bairro(bairro):
 def get_linha_onibus(municipio):
         response.content_type = 'application/json'
         response.add_header('Access-Control-Allow-Origin', '*')
-        municipio = municipio.replace('%20',' ')
+        municipio = municipio.replace('%20', ' ')
         return (get_data('linha_onibus', municipio.upper()))
     
 @route('/search/ponto_interesse/<bairro>')
 def get_ponto_interesse(bairro):
         response.content_type = 'application/json'
         response.add_header('Access-Control-Allow-Origin', '*')
-        bairro = bairro.replace('%20',' ')
+        bairro = bairro.replace('%20', ' ')
         return (get_data('ponto_interesse', bairro.upper()))
     
 @route('/search/sistema_viario/<bairro>')
 def get_sistema_viario(bairro):
         response.content_type = 'application/json'
         response.add_header('Access-Control-Allow-Origin', '*')
-        bairro = bairro.replace('%20',' ')
+        bairro = bairro.replace('%20', ' ')
         return (get_data('sistema_viario', bairro.upper()))
     
 @route('/search/qedu/<escola>')

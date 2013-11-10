@@ -24,7 +24,8 @@
 		<link rel="stylesheet" href="style_unstable/tabs.css">
 		<link rel="stylesheet" href="style_unstable/toolbars.css">
 
-		<!-- Icons -->s
+		<!-- Icons -->
+		s
 		<link rel="stylesheet" href="icons/styles/action_icons.css">
 		<link rel="stylesheet" href="icons/styles/media_icons.css">
 		<link rel="stylesheet" href="icons/styles/comms_icons.css">
@@ -51,8 +52,7 @@
 
 		<script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
 
-		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?&sensor=false">
-    	</script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?&sensor=false"></script>
 
 		<!-- mapas -->
 		<script type="text/javascript" charset="UTF-8" src="https://js.cit.api.here.com/ee/2.5.3/jsl.js?with=all"></script>
@@ -95,7 +95,7 @@
 			function closeBairroDialog() {
 				bairroDialog.classList.add("hidden");
 			}
-			
+
 			function requestInteresse() {
 
 				$('#drawer').click();
@@ -105,6 +105,7 @@
 			function closeInteresseDialog() {
 				interesseDialog.classList.add("hidden");
 			}
+
 
 			window.onload = function() {
 				// elements that we're going to reuse in the code
@@ -123,79 +124,79 @@
 
 				document.getElementById("bairro-btn").addEventListener("click", requestBairro);
 				document.getElementById("close-bairro").addEventListener("click", closeBairroDialog);
-				
+
 				document.getElementById("interesse-btn").addEventListener("click", requestInteresse);
 				document.getElementById("close-interesse").addEventListener("click", closeInteresseDialog);
 
 			};
 		</script>
 
-			<script>
+		<script>
 			function fill_bairro(bairro) {
-			var xhr = new XMLHttpRequest({
-				mozSystem : true
-			});
-			
-			// bairro = http://cep.correiocontrol.com.br/02245010.json
-			
-			xhr.open('GET', 'http://192.168.0.159:8081/search/dados_gerais_bairro/' + bairro);
-			xhr.overrideMimeType('application/json');
-			xhr.responseType = "json";
-			xhr.send();
-			xhr.onreadystatechange = function() {
-				if (xhr.status == 200) {
-					console.log(this.response[0].bairro);
-					$('#bairro-list').text('');
-					$('#bairro-list').append('<ul>');
-					$('#bairro-list').append('<li>Bairro: ' + this.response[0].bairro + ' (' + this.response[0].municipio + ')</li>');
-					$('#bairro-list').append('<li>Area Total: ' + this.response[0].area_total + 'km</li>');
-					$('#bairro-list').append('<li>Domicilios: ' + this.response[0].num_familias + '</li>');
-					$('#bairro-list').append('<li>Populacao: ' + this.response[0].populacao + ' (' + this.response[0].num_familias + ' familias)</li>');
-					$('#bairro-list').append('<li>Matriculas escolares: ' + this.response[0].num_matriculas + '</li>');
-					$('#bairro-list').append('<li>Empregos: ' + this.response[0].num_empregos + '</li>'); 
-					
-					$('#bairro-list').append('</ul>');
-				}
-			};
+				var xhr = new XMLHttpRequest({
+					mozSystem : true
+				});
 
-			xhr.onerror = function() {
-				console.log('Erro!');
-			};
+				// bairro = http://cep.correiocontrol.com.br/02245010.json
+
+				xhr.open('GET', 'http://192.168.0.159:8081/search/dados_gerais_bairro/' + bairro);
+				xhr.overrideMimeType('application/json');
+				xhr.responseType = "json";
+				xhr.send();
+				xhr.onreadystatechange = function() {
+					if (xhr.status == 200) {
+						console.log(this.response[0].bairro);
+						$('#bairro-list').text('');
+						$('#bairro-list').append('<ul>');
+						$('#bairro-list').append('<li>Bairro: ' + this.response[0].bairro + ' (' + this.response[0].municipio + ')</li>');
+						$('#bairro-list').append('<li>Area Total: ' + this.response[0].area_total + 'km</li>');
+						$('#bairro-list').append('<li>Domicilios: ' + this.response[0].num_familias + '</li>');
+						$('#bairro-list').append('<li>Populacao: ' + this.response[0].populacao + ' (' + this.response[0].num_familias + ' familias)</li>');
+						$('#bairro-list').append('<li>Matriculas escolares: ' + this.response[0].num_matriculas + '</li>');
+						$('#bairro-list').append('<li>Empregos: ' + this.response[0].num_empregos + '</li>');
+
+						$('#bairro-list').append('</ul>');
+					}
+				};
+
+				xhr.onerror = function() {
+					console.log('Erro!');
+				};
 			};
 			fill_bairro('bela vista');
 		</script>
 		<script>
-		function fill_interesse(bairro,index) {
-			var xhr = new XMLHttpRequest({
-				mozSystem : true
-			});
-			
-			// bairro = http://cep.correiocontrol.com.br/02245010.json
-			
-			xhr.open('GET', 'http://192.168.0.159:8081/search/ponto_interesse/' + bairro);
-			xhr.overrideMimeType('application/json');
-			xhr.responseType = "json";
-			xhr.send();
-			xhr.onreadystatechange = function() {
-				console.log(this);
-				if (xhr.status == 200) {
-					$('#interesse-list').text('Pontos de interesse em ' + bairro);
-					$('#interesse-list').append('<ul>');
-					for ( var index = 0 ; index < 10 ; index++ ) {
-					$('#interesse-list').append('<li>Categoria: ' + this.response[index].subcategoria + '</li>');
-					$('#interesse-list').append('<li>Nome: ' + this.response[index].nome + '</li>');
-					$('#interesse-list').append('<li>Endereco: ' + this.response[index].endereco + '</li>');
-					$('#interesse-list').append('<br>');
-					}
-					$('#interesse-list').append('</ul>');
-				}
-			};
+			function fill_interesse(bairro, index) {
+				var xhr = new XMLHttpRequest({
+					mozSystem : true
+				});
 
-			xhr.onerror = function() {
-				console.log(xhr);
+				// bairro = http://cep.correiocontrol.com.br/02245010.json
+
+				xhr.open('GET', 'http://192.168.0.159:8081/search/ponto_interesse/' + bairro);
+				xhr.overrideMimeType('application/json');
+				xhr.responseType = "json";
+				xhr.send();
+				xhr.onreadystatechange = function() {
+					console.log(this);
+					if (xhr.status == 200) {
+						$('#interesse-list').text('Pontos de interesse em ' + bairro);
+						$('#interesse-list').append('<ul>');
+						for (var index = 0; index < 10; index++) {
+							$('#interesse-list').append('<li>Categoria: ' + this.response[index].subcategoria + '</li>');
+							$('#interesse-list').append('<li>Nome: ' + this.response[index].nome + '</li>');
+							$('#interesse-list').append('<li>Endereco: ' + this.response[index].endereco + '</li>');
+							$('#interesse-list').append('<br>');
+						}
+						$('#interesse-list').append('</ul>');
+					}
+				};
+
+				xhr.onerror = function() {
+					console.log(xhr);
+				};
 			};
-			};
-			fill_interesse('bela vista',0);
+			fill_interesse('bela vista', 0);
 		</script>
 
 	</head>
