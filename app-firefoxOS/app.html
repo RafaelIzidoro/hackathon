@@ -65,6 +65,7 @@
 			var sobreDialog;
 			var escolasDialog;
 			var bairroDialog;
+			var interesseDialog;
 			function requestDeleteConfirmation() {
 
 				$('#drawer').click();
@@ -94,13 +95,23 @@
 			function closeBairroDialog() {
 				bairroDialog.classList.add("hidden");
 			}
+			
+			function requestInteresse() {
 
+				$('#drawer').click();
+				interesseDialog.classList.remove("hidden");
+			}
+
+			function closeInteresseDialog() {
+				interesseDialog.classList.add("hidden");
+			}
 
 			window.onload = function() {
 				// elements that we're going to reuse in the code
 				sobreDialog = document.getElementById("sobre-page");
 				escolasDialog = document.getElementById("escola-page");
 				bairroDialog = document.getElementById("bairro-page");
+				interesseDialog = document.getElementById("interesse-page");
 
 				// All the listeners for the interface buttons and for the input changes
 
@@ -112,6 +123,9 @@
 
 				document.getElementById("bairro-btn").addEventListener("click", requestBairro);
 				document.getElementById("close-bairro").addEventListener("click", closeBairroDialog);
+				
+				document.getElementById("interesse-btn").addEventListener("click", requestInteresse);
+				document.getElementById("close-interesse").addEventListener("click", closeInteresseDialog);
 
 			};
 		</script>
@@ -150,6 +164,39 @@
 			};
 			fill_bairro('bela vista');
 		</script>
+		<script>
+		function fill_interesse(bairro,index) {
+			var xhr = new XMLHttpRequest({
+				mozSystem : true
+			});
+			
+			// bairro = http://cep.correiocontrol.com.br/02245010.json
+			
+			xhr.open('GET', 'http://192.168.0.159:8081/search/ponto_interesse/' + bairro);
+			xhr.overrideMimeType('application/json');
+			xhr.responseType = "json";
+			xhr.send();
+			xhr.onreadystatechange = function() {
+				console.log(this);
+				if (xhr.status == 200) {
+					$('#interesse-list').text('Pontos de interesse em ' + bairro);
+					$('#interesse-list').append('<ul>');
+					for ( var index = 0 ; index < 10 ; index++ ) {
+					$('#interesse-list').append('<li>Categoria: ' + this.response[index].subcategoria + '</li>');
+					$('#interesse-list').append('<li>Nome: ' + this.response[index].nome + '</li>');
+					$('#interesse-list').append('<li>Endereco: ' + this.response[index].endereco + '</li>');
+					$('#interesse-list').append('<br>');
+					}
+					$('#interesse-list').append('</ul>');
+				}
+			};
+
+			xhr.onerror = function() {
+				console.log(xhr);
+			};
+			};
+			fill_interesse('bela vista',0);
+		</script>
 
 	</head>
 
@@ -171,11 +218,9 @@
 					</li>
 
 					<li>
-						<a href="#content">label</a>
+						<a id='interesse-btn'>Pontos de Interesse</a>
 					</li>
-					<li>
-						<a href="#content">label</a>
-					</li>
+
 				</ul>
 				<h2>Equipe</h2>
 				<ul>
@@ -241,7 +286,7 @@
 					<section>
 						<h1>Sobre</h1>
 						<p>
-							lorem ipsum.....
+							USPCidades - 1o Hackathon
 						</p>
 					</section>
 					<menu>
@@ -274,13 +319,28 @@
 
 				</section>
 
+				<!-- Bairro Ponto Interesse -->
+				<form id="interesse-page" role="dialog" data-type="confirm" class="hidden">
+					<section>
+						<h1>Pontos de Interesse</h1>
+						<p id='interesse-list'>
+							Dados não disponiveis
+						</p>
+					</section>
+					<menu>
+						<button id="close-interesse">
+							Back
+						</button>
+					</menu>
+				</form>
+
 				<!-- Bairro Dado Geral -->
 				<form id="bairro-page" role="dialog" data-type="confirm" class="hidden">
 					<section>
 						<h1>Bairro</h1>
 						<input type=hidden id='cep' value=''>
 						<p id='bairro-list'>
-							lorem ipsum.....
+							Dados não disponiveis
 						</p>
 					</section>
 					<menu>
@@ -295,7 +355,7 @@
 					<section>
 						<h1>Escola</h1>
 						<p id='escola-list'>
-							lorem ipsum.....
+							Dados não disponiveis, tente novamente mais tarde
 						</p>
 					</section>
 					<menu>

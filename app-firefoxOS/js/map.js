@@ -97,6 +97,7 @@ $(document).ready(function() {
 
 			console.log(data.bairro);
 			fill_bairro(data.bairro);
+			fill_interesse(data.bairro,0);
 		  });
 		  };
 	

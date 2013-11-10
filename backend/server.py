@@ -18,11 +18,15 @@ def jsontest():
 
 @route('/search/area_contaminada/<bairro>')
 def get_area_contaminada(bairro):
+        response.content_type = 'application/json'
+        response.add_header('Access-Control-Allow-Origin', '*')
         bairro = bairro.replace('%20',' ')
         return (get_data('area_contaminada', bairro.upper()))
 
 @route('/search/cartorios/<bairro>')
 def get_cartorios(bairro):
+        response.content_type = 'application/json'
+        response.add_header('Access-Control-Allow-Origin', '*')
         bairro = bairro.replace('%20',' ')
         return (get_data('cartorios', bairro.upper()))
     
@@ -36,21 +40,29 @@ def get_dados_gerais_bairro(bairro):
     
 @route('/search/linha_onibus/<municipio>')
 def get_linha_onibus(municipio):
+        response.content_type = 'application/json'
+        response.add_header('Access-Control-Allow-Origin', '*')
         municipio = municipio.replace('%20',' ')
         return (get_data('linha_onibus', municipio.upper()))
     
 @route('/search/ponto_interesse/<bairro>')
 def get_ponto_interesse(bairro):
+        response.content_type = 'application/json'
+        response.add_header('Access-Control-Allow-Origin', '*')
         bairro = bairro.replace('%20',' ')
         return (get_data('ponto_interesse', bairro.upper()))
     
 @route('/search/sistema_viario/<bairro>')
 def get_sistema_viario(bairro):
+        response.content_type = 'application/json'
+        response.add_header('Access-Control-Allow-Origin', '*')
         bairro = bairro.replace('%20',' ')
         return (get_data('sistema_viario', bairro.upper()))
     
 @route('/search/qedu/<escola>')
 def get_qedu(escola):
+    response.content_type = 'application/json'
+    response.add_header('Access-Control-Allow-Origin', '*')
     return (get_data('qedu', escola))   
 
     
