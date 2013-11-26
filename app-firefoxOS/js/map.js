@@ -89,6 +89,28 @@ $(document).ready(function() {
 		curr_marker = L.marker([lat, lng]).addTo(map);				
 	}
 
+	
+	function get_bairro(cep) {
+		
+		$.getJSON('http://cep.correiocontrol.com.br/' + cep + '.json', function(data) {
+			var items = [];
+
+			console.log(data.bairro);
+			fill_bairro(data.bairro);
+			fill_interesse(data.bairro,0);
+		  });
+		  };
+	
+
+	function get_cep(lat, lon) {
+		$.getJSON('http://maps.google.com/maps/api/geocode/json?address=' + lat + ',' + lon + '&sensor=false', function(data) {
+			var items = [];
+
+			console.log(data.results[1].address_components[6].short_name);
+			get_bairro(data.results[1].address_components[6].short_name.replace('-',''));
+		  });
+		  };
+
 
 
 
@@ -98,7 +120,13 @@ $(document).ready(function() {
 		$.getJSON('http://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + inp, function(data) {
 			var items = [];
 			getUserLocation(data[0].lat, data[0].lon);
+<<<<<<< HEAD
 
+=======
+			
+			get_cep(data[0].lat, data[0].lon);
+						
+>>>>>>> 113d8a79eddb320a228b12a5f131bb35cb23e501
 			$.each(data, function(key, val) {
 			  items.push(
 			    "<li><a href='#' onclick='chooseAddr(" +

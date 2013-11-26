@@ -14,6 +14,8 @@ def get_data(table, value):
         return get_dados_gerais_bairro(value)
     elif table == 'qedu':
         return get_qedu(value)
+    elif table == 'ponto_interesse':
+        return get_ponto_interesse(value)
     
 def get_dados_gerais_bairro(bairro):
     try:
@@ -34,7 +36,7 @@ def get_dados_gerais_bairro(bairro):
 def get_area_contaminada(bairro):
     try:
         # Load the connection
-        query = "SELECT * FROM area_contaminada WHERE UPPER(bairro) = '%s'" % bairro
+        query = "SELECT * FROM area_contaminada WHERE UPPER(bairro) = '%s'  LIMIT 15" % bairro
         connection = connect()
         cursor = connection.cursor()
         cursor.execute(query)
@@ -50,7 +52,7 @@ def get_area_contaminada(bairro):
 def get_cartorios(bairro):
     try:
         # Load the connection
-        query = "SELECT * FROM cartorios WHERE UPPER(bairro) = '%s'" % bairro
+        query = "SELECT * FROM cartorios WHERE UPPER(bairro) = '%s'  LIMIT 15" % bairro
         connection = connect()
         cursor = connection.cursor()
         cursor.execute(query)
@@ -66,7 +68,8 @@ def get_cartorios(bairro):
 def get_linha_onibus(municipio):
     try:
         # Load the connection
-        query = "SELECT * FROM linha_onibus WHERE UPPER(municipio) = '%s'" % municipio
+        query = "SELECT * FROM linha_onibus WHERE UPPER(municipio) = '%s'  LIMIT 15" % municipio
+        print query
         connection = connect()
         cursor = connection.cursor()
         cursor.execute(query)
@@ -82,7 +85,7 @@ def get_linha_onibus(municipio):
 def get_ponto_interesse(bairro):
     try:
         # Load the connection
-        query = "SELECT * FROM ponto_interesse WHERE UPPER(bairro) = '%s'" % bairro
+        query = "SELECT * FROM ponto_interesse WHERE UPPER(bairro) = '%s' LIMIT 15" % bairro
         connection = connect()
         cursor = connection.cursor()
         cursor.execute(query)
@@ -98,7 +101,7 @@ def get_ponto_interesse(bairro):
 def get_sistema_viario(bairro):
     try:
         # Load the connection
-        query = "SELECT * FROM sistema_viario WHERE UPPER(bairro_esq) = '%s' OR UPPER(bairro_dir) = '%'" % bairro
+        query = "SELECT * FROM sistema_viario WHERE UPPER(bairro_esq) = '%s' OR UPPER(bairro_dir) = '%'  LIMIT 15" % bairro
         connection = connect()
         cursor = connection.cursor()
         cursor.execute(query)

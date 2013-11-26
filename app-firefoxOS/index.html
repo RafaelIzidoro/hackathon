@@ -12,6 +12,7 @@
 
         <title>SmartCity</title>
 
+<<<<<<< HEAD
         <script>
             $("document").ready(function() {
                 var interval = setInterval(function() {loading()}, 13);
@@ -31,4 +32,22 @@
         <div class="homescreen"></div>
         <progress value="0" max="100" class="pack-activity"></progress>
     </body>
+=======
+        function loading() {
+        if($(".pack-activity").val() == "100"){
+            window.location.href = "app.html";
+        } else {
+            $(".pack-activity").attr("value", $(".pack-activity").val()+1);
+        }
+    }
+    });
+    
+  </script>
+  <link >
+</head>
+<body>
+    <div class="homescreen"></div>
+    <progress value="0" max="100" class="pack-activity"></progress>
+</body>
+>>>>>>> 113d8a79eddb320a228b12a5f131bb35cb23e501
 </html>
