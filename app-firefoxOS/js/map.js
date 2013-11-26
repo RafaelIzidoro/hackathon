@@ -98,6 +98,7 @@ $(document).ready(function() {
 		$.getJSON('http://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + inp, function(data) {
 			var items = [];
 			getUserLocation(data[0].lat, data[0].lon);
+
 			$.each(data, function(key, val) {
 			  items.push(
 			    "<li><a href='#' onclick='chooseAddr(" +

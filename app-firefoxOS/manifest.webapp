@@ -4,7 +4,7 @@
     "description": "Your new awesome Open Web App",
     "launch_path": "/index.html",
     "icons": {
-        "128": "/img/logo128.png"
+        "60": "/img/icone.png"
     },
     "developer": {
         "name": "Emerson Urushibata",
